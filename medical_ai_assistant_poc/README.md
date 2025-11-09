@@ -4,28 +4,6 @@
 
 ---
 
-## Table of Contents
-
-1. **Overview**
-2. **Features**
-3. **Architecture**
-4. **System Components**
-5. **Tech Stack**
-6. **Project Structure**
-7. **Installation**
-8. **Configuration**
-9. **Initialize Data**
-10. **Running the Application**
-11. **Usage**
-12. **API Endpoints**
-13. **Safety Protocols**
-14. **Future Enhancements**
-15. **Contributing**
-16. **License**
-17. **Contact**
-
----
-
 # 1. Overview
 
 **Medical AI Assistant: Post-Discharge Care POC** is a proof-of-concept system that demonstrates a multi-agent approach to post-discharge patient support. The system is intended for demonstration and research purposes only and is **not** a substitute for professional medical advice. All responses must include a medical disclaimer and emergency handling policy.
@@ -163,8 +141,8 @@ medical_ai_assistant_poc/
 **Prerequisites**
 
 - Python 3.11+
-- `conda` or `venv` recommended
-- Google Gemini API key (or replace LLM calls with your preferred provider for testing)
+- `conda`  recommended
+- Google Gemini API key 
 
 **Step 1 — Create Environment**
 
@@ -192,7 +170,6 @@ Create a `.env` file in the `backend/` directory and add:
 
 ```bash
 GEMINI_API_KEY="your_gemini_api_key_here"
-HF_EMBEDDING_API_KEY="your_hf_api_key_if_needed"
 DATABASE_URL="sqlite:///../data/patient_data.db"
 ```
 
@@ -302,30 +279,4 @@ If the user indicates severe chest pain, difficulty breathing, loss of conscious
 
 ---
 
-# 15. Contributing
-
-This repository is intended for research and educational use. If you would like to contribute:
-
-1. Fork the repository
-2. Create a feature branch: `git checkout -b feature/your-feature`
-3. Commit your changes and push
-4. Open a pull request with a clear description of your changes
-
-Please include tests and documentation for new functionality. For major changes, open an issue first to discuss design and scope.
-
----
-
-# 16. License
-
-**This project is for educational and research purposes only.** Use at your own risk. This repository is not intended for clinical use. If you would like to apply a formal open-source license, add a `LICENSE` file (e.g., MIT, Apache-2.0) and update this section accordingly.
-
----
-
-# 17. Contact
-
-For questions or collaboration inquiries, please open an issue in this repository or contact the maintainer via the project email configured in the repo settings.
-
----
-
-**Important Note:** This README is designed for a proof-of-concept/demo environment. If you plan to deploy or use this system in a clinical or production setting, undertake a full privacy, security, and regulatory compliance review and obtain clinical validation.
 
