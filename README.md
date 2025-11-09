@@ -59,67 +59,18 @@ Streamlit UI → FastAPI Backend → LangGraph Orchestration → Multi-Agent Sys
 | **Data Layer** | SQLite for discharge reports and patient metadata.<br> FAISS indexes and docstore for RAG retrieval.<br> Local `data/` folder for PDFs, JSONs, and DB files. |
 
 ---
-# 4. System Components
-
-**Frontend Layer**
-
-- Streamlit web UI for patient interactions and simple admin views.
-
-**API Layer**
-
-- FastAPI provides REST endpoints for message processing, patient retrieval, and safety checks.
-
-**Orchestration**
-
-- LangGraph state machine orchestrates agent invocation and context passing between agents.
-
-**Agent Layer**
-
-- **Receptionist Agent:** Authenticates or identifies patient records, manages session metadata.
-- **Clinical Agent:** Executes RAG retrieval, composes answers, supplements responses with web search when needed.
-- **Safety Agent:** Runs urgency detection, executes emergency exit protocol, and ensures disclaimers are attached.
-
-**RAG Pipeline**
-
-- Document chunking with semantic overlap for context continuity.
-- Embeddings via Hugging Face models.
-- FAISS for similarity search and efficient retrieval.
-- Context augmentation and response generation via the chosen LLM.
-
-**Data Layer**
-
-- SQLite for discharge reports and patient metadata.
-- FAISS indexes and docstore for RAG retrieval.
-- Local `data/` folder for PDFs, JSONs, and DB files.
-
----
 
 # 5. Tech Stack
 
-**AI / ML Frameworks**
-
-- LangGraph
-- LangChain (agent/tool abstractions)
-- Google Gemini 2.5 Flash (LLM for reasoning & generation)
-
-**Data & Storage**
-
-- FAISS (vector store)
-- SQLite (structured patient data)
-- Hugging Face embeddings (RAG embeddings)
-
-**Backend & Frontend**
-
-- FastAPI
-- Streamlit
-- Uvicorn (ASGI server)
-
-**Utilities**
-
-- Python 3.11+
-- Common libraries: `numpy`, `pandas`, `sqlalchemy`, `faiss-cpu` (or `faiss-gpu`), `transformers`, and HTTP clients.
+| Category | Tools / Frameworks |
+|-----------|--------------------|
+| **AI / ML Frameworks** | LangGraph, LangChain (agent/tool abstractions), Google Gemini 2.5 Flash (LLM for reasoning & generation) |
+| **Data & Storage** | FAISS (vector store), SQLite (structured patient data), Hugging Face embeddings (RAG embeddings) |
+| **Backend & Frontend** | FastAPI, Streamlit, Uvicorn (ASGI server) |
+| **Utilities** | Python 3.11+, common libraries: `numpy`, `pandas`, `sqlalchemy`, `faiss-cpu` / `faiss-gpu`, `transformers`, HTTP clients |
 
 ---
+
 
 # 6. Project Structure
 
