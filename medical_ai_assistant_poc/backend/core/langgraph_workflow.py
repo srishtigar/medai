@@ -450,4 +450,4 @@ def get_workflow_app():
 if __name__ == "__main__":
     print("Testing workflow...")
     app = build_workflow()
-    print("✅ Workflow test complete!")
+    print("Workflow test complete!")
