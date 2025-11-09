@@ -9,7 +9,9 @@
 **Medical AI Assistant: Post-Discharge Care POC** is a proof-of-concept system that demonstrates a multi-agent approach to post-discharge patient support. The system is intended for demonstration and research purposes only and is **not** a substitute for professional medical advice. All responses must include a medical disclaimer and emergency handling policy.
 
 ---
+### Low-level-Architecture
 
+![Low Level Architecture](./medai-architecture.png)
 # 2. Features
 
 **Core Capabilities**
