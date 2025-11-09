@@ -1,0 +1,24 @@
+# Backend Dependencies (FastAPI, LangChain, LangGraph, etc.)
+fastapi
+uvicorn
+pydantic
+langchain
+langgraph
+
+# For RAG
+pypdf
+faiss-cpu
+sentence-transformers
+langchain-community  # Required for HuggingFaceEmbeddings, BM25Retriever, and FAISS
+langchain-text-splitters # Required for RecursiveCharacterTextSplitter
+rank-bm25 # Required for the BM25Retriever sparse search
+
+# For Database
+sqlalchemy
+
+# For Gemini API
+google-generativeai
+
+# Utilities
+python-dotenv
+tqdm

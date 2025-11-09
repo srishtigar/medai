@@ -1,0 +1,42 @@
+# --- Python cache and build files ---
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.pkl
+*.bin
+*.faiss
+*.log
+*.sqlite3
+
+# --- Virtual environments ---
+.venv/
+venv/
+env/
+
+# --- Environment & config ---
+.env
+*.db
+*.json
+*.yaml
+*.yml
+
+# --- FAISS / Index files ---
+faiss_index/
+index.faiss
+index.pkl
+index.bin
+
+# --- Streamlit & temporary files ---
+logs/
+.checkpoints/
+*.tmp
+*.log
+
+# --- VS Code settings ---
+.vscode/
+*.code-workspace
+
+# --- OS specific ---
+.DS_Store
+Thumbs.db

@@ -1,0 +1,17 @@
+_# Backend Dependencies (FastAPI, LangChain, LangGraph, etc.)
+fastapi
+uvicorn
+pydantic
+langchain
+langgraph
+# For RAG
+pypdf
+faiss-cpu
+sentence-transformers
+# For Database
+sqlalchemy
+# For Gemini API
+google-generativeai
+# Utilities
+python-dotenv
+tqdm_
