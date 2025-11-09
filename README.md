@@ -24,7 +24,7 @@
 
 # 3. Architecture
 
-**High-level Flow**
+## High-level Flow
 
 Streamlit UI → FastAPI Backend → LangGraph Orchestration → Multi-Agent System → Data Layer
 
