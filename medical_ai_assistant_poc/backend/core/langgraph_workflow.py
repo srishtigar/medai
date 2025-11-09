@@ -101,7 +101,7 @@ def call_receptionist(state: AgentState) -> AgentState:
             "messages": [HumanMessage(content=user_input)]
         }
     except Exception as e:
-        print(f"❌ ERROR [Receptionist]: {str(e)}")
+        print(f"ERROR [Receptionist]: {str(e)}")
         log_error(session_id, f"Error in receptionist agent: {str(e)}", "call_receptionist")
         return {
             "agent_output": {"error": str(e)},
@@ -232,7 +232,7 @@ def check_safety_node(state: AgentState) -> AgentState:
         
         return {"safety_check_result": result}
     except Exception as e:
-        print(f"❌ ERROR [Safety Check]: {str(e)}")
+        print(f"ERROR [Safety Check]: {str(e)}")
         log_error(session_id, f"Error in safety check: {str(e)}", "check_safety_node")
         return {
             "safety_check_result": {
@@ -267,7 +267,7 @@ def call_clinical(state: AgentState) -> AgentState:
         
         return {"final_response": final_response}
     except Exception as e:
-        print(f"❌ ERROR [Clinical]: {str(e)}")
+        print(f"ERROR [Clinical]: {str(e)}")
         log_error(session_id, f"Error in clinical agent: {str(e)}", "call_clinical")
         return {
             "final_response": "I apologize, but I encountered an error processing your request. Please try rephrasing your question."
@@ -278,7 +278,7 @@ def emergency_exit(state: AgentState) -> AgentState:
     session_id = state["session_id"]
     log_agent_handoff(session_id, "SafetyCheck", "EmergencyExit", "Query classified as urgent/harmful.")
     
-    print(f"🚨 DEBUG [Emergency Exit]: Triggered!")
+    print(f"DEBUG [Emergency Exit]: Triggered!")
     
     safety_message = (
         "**EMERGENCY ALERT:** This is an emergency. Based on your input, you may be experiencing a critical medical situation. "
@@ -325,18 +325,18 @@ def route_after_retrieval(state: AgentState) -> str:
     
     # If patient was just identified, END here and wait for next user message
     if state.get("patient_just_identified", False):
-        print(f"🔀 DEBUG [Route]: ✅ Patient just identified → Going to format_output (END after)")
+        print(f"🔀 DEBUG [Route]: Patient just identified → Going to format_output (END after)")
         # Reset the flag for next iteration
         state["patient_just_identified"] = False
         return "format_output"
     
     # If patient already identified and this is a new query, go to safety check
     if state.get("patient_report"):
-        print(f"🔀 DEBUG [Route]: ✅ Patient already identified, new query → Going to safety_check")
+        print(f"🔀 DEBUG [Route]: Patient already identified, new query → Going to safety_check")
         return "safety_check"
     
     # No patient data, return response and end
-    print(f"🔀 DEBUG [Route]: ❌ No patient data → Going to format_output")
+    print(f"🔀 DEBUG [Route]: No patient data → Going to format_output")
     return "format_output"
 
 def route_after_safety_check(state: AgentState) -> str:
@@ -360,12 +360,12 @@ def route_after_safety_check(state: AgentState) -> str:
 def build_workflow() -> StateGraph:
     """Builds and compiles the LangGraph workflow."""
     
-    print("🏗️  Building LangGraph workflow...")
+    print("Building LangGraph workflow...")
     
     workflow = StateGraph(AgentState)
     
     # Add Nodes
-    print("  📍 Adding nodes...")
+    print("Adding nodes...")
     workflow.add_node("receptionist", call_receptionist)
     workflow.add_node("handle_retrieval", handle_patient_retrieval)
     workflow.add_node("safety_check", check_safety_node)
@@ -374,11 +374,11 @@ def build_workflow() -> StateGraph:
     workflow.add_node("format_output", format_output)
     
     # Set Entry Point
-    print("  🚪 Setting entry point...")
+    print("Setting entry point...")
     workflow.set_entry_point("receptionist")
     
     # Define Edges
-    print("  🔗 Adding edges...")
+    print("Adding edges...")
     
     # 1. Receptionist -> Handle Retrieval
     workflow.add_edge("receptionist", "handle_retrieval")
@@ -415,14 +415,14 @@ def build_workflow() -> StateGraph:
     workflow.add_edge("format_output", END)
     
     # CRITICAL FIX: Create SQLite connection for checkpointing (PERSISTENT FILE)
-    print("  💾 Setting up checkpointer...")
+    print("Setting up checkpointer...")
     # Get the directory of the current file
     current_dir = os.path.dirname(os.path.abspath(__file__))
     # Go up two levels to the backend directory
     backend_dir = os.path.dirname(os.path.dirname(current_dir))
     # Create checkpoints.db in the backend directory
     db_path = os.path.join(backend_dir, "checkpoints.db")
-    print(f"  💾 Checkpoint database: {db_path}")
+    print(f"Checkpoint database: {db_path}")
     
     # Ensure the directory exists
     os.makedirs(os.path.dirname(db_path), exist_ok=True)
@@ -431,14 +431,14 @@ def build_workflow() -> StateGraph:
     conn = sqlite3.connect(db_path, check_same_thread=False)
     
     # Compile the graph
-    print("  ⚙️  Compiling workflow...")
+    print("Compiling workflow...")
     app = workflow.compile(
         checkpointer=SqliteSaver(conn),
         debug=False
     )
     
-    print("✅ Workflow built successfully!")
-    print(f"✅ Checkpoints will be saved to: {db_path}")
+    print("Workflow built successfully!")
+    print(f"Checkpoints will be saved to: {db_path}")
     return app
 
 # --- 5. Main Function for FastAPI Integration ---
@@ -448,6 +448,6 @@ def get_workflow_app():
     return build_workflow()
 
 if __name__ == "__main__":
-    print("🧪 Testing workflow...")
+    print("Testing workflow...")
     app = build_workflow()
     print("✅ Workflow test complete!")
