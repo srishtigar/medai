@@ -277,7 +277,6 @@ If the user indicates severe chest pain, difficulty breathing, loss of conscious
 - Multi-language support and localized medical content
 - Advanced symptom checking and automated triage capabilities
 - Voice interface and mobile client development
-- HIPAA compliance and security hardening for production use
 - Clinical validation and user testing with healthcare professionals
 - Provider dashboard for monitoring and analytics
 
