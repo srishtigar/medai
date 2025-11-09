@@ -44,6 +44,21 @@ Streamlit UI → FastAPI Backend → LangGraph Orchestration → Multi-Agent Sys
 ## Demo Video
 [▶️ Watch the demo](https://github.com/srishtigar/medai/raw/main/working_poc_application.mp4)
 ---
+
+---
+
+# 4. System Components
+
+| **Component** | **Description** |
+|----------------|-----------------|
+| **Frontend Layer** | Streamlit web UI for patient interactions and simple admin views. |
+| **API Layer** | FastAPI provides REST endpoints for message processing, patient retrieval, and safety checks. |
+| **Orchestration** | LangGraph state machine orchestrates agent invocation and context passing between agents. |
+| **Agent Layer** | **Receptionist Agent:** Authenticates or identifies patient records, manages session metadata.<br> **Clinical Agent:** Executes RAG retrieval, composes answers, supplements responses with web search when needed.<br> **Safety Agent:** Runs urgency detection, executes emergency exit protocol, and ensures disclaimers are attached. |
+| **RAG Pipeline** | Document chunking with semantic overlap for context continuity.<br> Embeddings via Hugging Face models.<br> FAISS for similarity search and efficient retrieval.<br> Context augmentation and response generation via the chosen LLM. |
+| **Data Layer** | SQLite for discharge reports and patient metadata.<br> FAISS indexes and docstore for RAG retrieval.<br> Local `data/` folder for PDFs, JSONs, and DB files. |
+
+---
 # 4. System Components
 
 **Frontend Layer**
