@@ -32,14 +32,6 @@ Streamlit UI → FastAPI Backend → LangGraph Orchestration → Multi-Agent Sys
 
 ![Low Level Architecture](./medai_architecture.png)
 
-**Low-level Components**
-
-- Frontend: Streamlit application that collects user input and displays conversation.
-- Backend: FastAPI-based REST API exposing endpoints used by the frontend and internal services.
-- Orchestration: LangGraph manages agent transitions and conditional routing.
-- Agents: Receptionist (patient identification), Clinical (RAG + web search), Safety (urgency detection and emergency handling).
-- Data Layer: SQLite for patient records; FAISS for semantic document retrieval; Hugging Face embeddings for vectorization.
-
 ---
 ## Demo Video
 [▶️ Watch the demo](https://github.com/srishtigar/medai/raw/main/working_poc_application.mp4)
