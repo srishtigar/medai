@@ -21,9 +21,9 @@ app = FastAPI(
 # Initialize the LangGraph application
 # Note: The SqliteSaver is initialized within the workflow builder in langgraph_workflow.py
 # The checkpointer will save state to a file named 'checkpoints.db' in the current directory.
-print("🚀 Initializing workflow...")
+print("Initializing workflow...")
 app_workflow = get_workflow_app()
-print("✅ Workflow initialized successfully!")
+print("Workflow initialized successfully!")
 
 # --- Pydantic Models ---
 
@@ -65,7 +65,7 @@ async def chat_endpoint(request: ChatRequest):
         print(f"🔍 DEBUG [Main]: Checking for existing state...")
         
         if current_state and current_state.values:
-            print(f"🔍 DEBUG [Main]: ✅ Found existing state")
+            print(f"🔍 DEBUG [Main]:Found existing state")
             print(f"🔍 DEBUG [Main]: State keys: {list(current_state.values.keys())}")
             
             # Check if patient data exists
@@ -74,7 +74,7 @@ async def chat_endpoint(request: ChatRequest):
             
             if has_patient:
                 print(f"🔍 DEBUG [Main]: Patient: {current_state.values.get('patient_name', 'Unknown')}")
-                print(f"🔍 DEBUG [Main]: 🎯 PRESERVING patient data for follow-up question")
+                print(f"🔍 DEBUG [Main]: PRESERVING patient data for follow-up question")
                 
                 # IMPORTANT: Only pass NEW input, checkpointer will restore the rest
                 inputs = {
@@ -84,7 +84,7 @@ async def chat_endpoint(request: ChatRequest):
                     # This is the key to preserving patient data!
                 }
             else:
-                print(f"🔍 DEBUG [Main]: No patient data yet, initializing fresh state")
+                print(f"DEBUG [Main]: No patient data yet, initializing fresh state")
                 inputs = {
                     "input": user_message,
                     "session_id": session_id,
@@ -100,7 +100,7 @@ async def chat_endpoint(request: ChatRequest):
                     "final_response": ""
                 }
         else:
-            print(f"🔍 DEBUG [Main]: 🆕 No existing state (first message)")
+            print(f"🔍 DEBUG [Main]: No existing state (first message)")
             # First message in this session
             inputs = {
                 "input": user_message,
@@ -118,7 +118,7 @@ async def chat_endpoint(request: ChatRequest):
             }
     except Exception as e:
         # Checkpointer error or first message
-        print(f"ℹ️  DEBUG [Main]: Could not retrieve state (likely first message): {str(e)[:100]}")
+        print(f"DEBUG [Main]: Could not retrieve state (likely first message): {str(e)[:100]}")
         inputs = {
             "input": user_message,
             "session_id": session_id,
@@ -139,24 +139,24 @@ async def chat_endpoint(request: ChatRequest):
     try:
         # 2. Invoke the workflow with config
         # The checkpointer will merge our input with the stored state
-        print(f"🔄 DEBUG [Main]: Invoking workflow with session: {session_id[:8]}...")
+        print(f"DEBUG [Main]: Invoking workflow with session: {session_id[:8]}...")
         
         final_state = app_workflow.invoke(inputs, config=config)
         
-        print(f"✅ DEBUG [Main]: Workflow completed!")
-        print(f"🔍 DEBUG [Main]: Final state keys: {list(final_state.keys())}")
-        print(f"🔍 DEBUG [Main]: Final patient_report exists: {bool(final_state.get('patient_report'))}")
+        print(f"DEBUG [Main]: Workflow completed!")
+        print(f"DEBUG [Main]: Final state keys: {list(final_state.keys())}")
+        print(f"DEBUG [Main]: Final patient_report exists: {bool(final_state.get('patient_report'))}")
         
         # 3. Extract the final response
         response_text = final_state.get("final_response", "")
         
-        print(f"📤 DEBUG [Main]: final_response exists: {bool(response_text)}")
-        print(f"📤 DEBUG [Main]: final_response length: {len(response_text)}")
-        print(f"📤 DEBUG [Main]: final_response preview: {response_text[:200]}...")
+        print(f"DEBUG [Main]: final_response exists: {bool(response_text)}")
+        print(f"DEBUG [Main]: final_response length: {len(response_text)}")
+        print(f"DEBUG [Main]: final_response preview: {response_text[:200]}...")
         
         # Fallback if no response was generated
         if not response_text:
-            print(f"⚠️  WARNING [Main]: Empty final_response! Using fallback message.")
+            print(f"WARNING [Main]: Empty final_response! Using fallback message.")
             response_text = "I apologize, but I couldn't generate a response. Please try again."
         
         # 4. Update chat history for the response
@@ -166,7 +166,7 @@ async def chat_endpoint(request: ChatRequest):
         ]
         
         print(f"\n{'='*80}")
-        print(f"✅ RESPONSE SENT | Length: {len(response_text)} chars")
+        print(f"RESPONSE SENT | Length: {len(response_text)} chars")
         print(f"{'='*80}\n")
         
         return ChatResponse(
@@ -177,13 +177,13 @@ async def chat_endpoint(request: ChatRequest):
         
     except Exception as e:
         print(f"\n{'='*80}")
-        print(f"❌ ERROR IN CHAT ENDPOINT")
+        print(f"ERROR IN CHAT ENDPOINT")
         print(f"{'='*80}")
         print(f"Error type: {type(e).__name__}")
         print(f"Error message: {str(e)}")
         
         import traceback
-        print(f"\n🔍 Full traceback:")
+        print(f"\n Full traceback:")
         traceback.print_exc()
         print(f"{'='*80}\n")
         
@@ -196,7 +196,7 @@ async def new_session():
     Generates a new unique session ID for a new user chat.
     """
     new_id = str(uuid.uuid4())
-    print(f"🆕 New session created: {new_id}")
+    print(f"New session created: {new_id}")
     return {"session_id": new_id}
 
 @app.get("/health")
@@ -213,7 +213,7 @@ async def root():
 async def startup_event():
     """Run on application startup."""
     print("\n" + "="*80)
-    print("🏥 MEDICAL AI ASSISTANT BACKEND")
+    print("MEDICAL AI ASSISTANT BACKEND")
     print("="*80)
     print("✅ FastAPI server started")
     print("✅ Workflow loaded")
@@ -224,7 +224,7 @@ async def startup_event():
     if os.path.exists(checkpoint_path):
         print(f"✅ Checkpoint database found: {checkpoint_path}")
     else:
-        print(f"ℹ️  Checkpoint database will be created on first use")
+        print(f"Checkpoint database will be created on first use")
     
     print("="*80 + "\n")
 
@@ -240,6 +240,6 @@ if __name__ == "__main__":
     # Ensure the logs directory exists before starting
     logs_dir = os.path.join(os.path.dirname(__file__), "logs")
     os.makedirs(logs_dir, exist_ok=True)
-    print(f"📁 Logs directory: {logs_dir}")
+    print(f"Logs directory: {logs_dir}")
     
     uvicorn.run(app, host="0.0.0.0", port=8000)
