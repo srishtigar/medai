@@ -46,6 +46,9 @@ Streamlit UI → FastAPI Backend → LangGraph Orchestration → Multi-Agent Sys
 ## Demo Video  
 [![Watch the demo](https://img.shields.io/badge/▶️%20Watch%20Demo-blue?style=for-the-badge)](https://github.com/srishtigar/medai/blob/main/working_poc_application.mp4)
 
+## 🎥 Demo Video
+[▶️ Watch the demo](https://github.com/srishtigar/medai/raw/main/working_poc_application.mp4)
+
 ---
 # 4. System Components
 
