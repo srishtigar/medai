@@ -175,7 +175,6 @@ Create a `.env` file in the `backend/` directory and add:
 
 ```bash
 GEMINI_API_KEY="your_gemini_api_key_here"
-HF_EMBEDDING_API_KEY="your_hf_api_key_if_needed"
 DATABASE_URL="sqlite:///../data/patient_data.db"
 ```
 
