@@ -11,7 +11,7 @@
 ---
 ### Low-level-Architecture
 
-![Low Level Architecture](./medai-architecture.png)
+![Low Level Architecture](./medai_architecture.png)
 # 2. Features
 
 **Core Capabilities**
