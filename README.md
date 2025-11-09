@@ -104,8 +104,8 @@ medical_ai_assistant_poc/
 **Prerequisites**
 
 - Python 3.11+
-- `conda` or `venv` recommended
-- Google Gemini API key (or replace LLM calls with your preferred provider for testing)
+- `conda`  
+- Google Gemini API key 
 
 **Step 1 — Create Environment**
 
@@ -135,9 +135,6 @@ Create a `.env` file in the `backend/` directory and add:
 GEMINI_API_KEY="your_gemini_api_key_here"
 DATABASE_URL="sqlite:///../data/patient_data.db"
 ```
-
-**Optional**: Configure FAISS index paths and embedding model names in `backend/core/rag_pipeline/index_builder.py`.
-
 ---
 
 # 9. Initialize Data
